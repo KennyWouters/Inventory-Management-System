@@ -1,0 +1,25 @@
+## Use case driven plugin based clean architecture
+
+as a user, i can view all the inventories as well as certain inventories by names, 
+so that i can manage them.
+
+Main scenario
+
+-pre conditions
+1. The user is on the inventories page
+
+-post conditions
+2. the user sees the inventories that meet the search condition
+
+-detailed steps
+1. the user enters a few letters in the search box
+2. the user clicks on the view button
+
+--------------------------------------------
+
+alternative scernario A
+-post conditions
+2a. the user sees all the inventories 
+
+-detailed steps
+1a. the user makes search box empty
