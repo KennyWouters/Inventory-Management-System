@@ -15,16 +15,7 @@
         {
             foreach (var inv in _inventories)
             {
-                <tr>
-                    <td>@inv.InventoryName</td>
-                    <td>@inv.Quantity</td>
-                    <td>@inv.Price.ToString("c")</td>
-                    <td>
-                        <button 
-                            type="button"
-                            class="btn btn-light">Edit</button>
-                    </td>
-                </tr>
+                <InventoryListItemComponent Inventory="inv"></InventoryListItemComponent>
             }
         }
         else
