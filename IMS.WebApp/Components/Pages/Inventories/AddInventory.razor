@@ -1,6 +1,7 @@
 ﻿@page "/add"
 
 @inject IAddInventoryUseCase AddInventoryUseCase
+@inject NavigationManager NavigationManager
 
 <h3>Add Item</h3>
 <br />
@@ -9,9 +10,7 @@
     <DataAnnotationsValidator></DataAnnotationsValidator>
 
     @* If summary is needed somewhere else, use the uncommented line above at the right place. *@
-    
-    @* <ValidationSummary></ValidationSummary> *@
-
+    @* ==>> <ValidationSummary></ValidationSummary> *@
     @* I decided to put the validation messages under the fields *@
 
     <div class="form-group">
@@ -48,8 +47,11 @@
     <br />
 
     <button type="submit" class="btn btn-primary">Save</button>
+    
 
 </EditForm>
+
+<a href="/inventories" class="btn btn-close">Cancel</a>
 
 @code{
     [SupplyParameterFromForm]
@@ -59,5 +61,7 @@
     private async Task Save()
     {
         await AddInventoryUseCase.ExecuteAsync(inventory);
+
+        NavigationManager.NavigateTo("/inventories");
     }
 }
