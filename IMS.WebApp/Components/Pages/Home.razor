@@ -1,6 +1,32 @@
 ﻿@page "/"
 
 @inject IViewInventoriesByNameUseCase ViewInventoriesByNameUseCase
+@inject IEditInventoryUseCase EditInventoryUseCase
 
 <PageTitle>Test</PageTitle>
 
+<ul>
+    @if(inventories is not null && inventories.Any())
+    {
+        foreach (var inventory in inventories)
+        {
+            <li>@inventory.InventoryName - @inventory.Quantity - @inventory.Price</li>
+        }
+    }
+    else
+    {
+        <li>No inventories found.</li>
+    }
+</ul>
+
+@code{
+    private List<Inventory>? inventories;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var inventory = new Inventory { InventoryId = 2, InventoryName = "Bike Seat", Quantity = 50, Price = 100 };
+        await EditInventoryUseCase.ExecuteAsync(inventory);
+
+        inventories = (await ViewInventoriesByNameUseCase.ExecuteAsync()).ToList();
+    }
+}
