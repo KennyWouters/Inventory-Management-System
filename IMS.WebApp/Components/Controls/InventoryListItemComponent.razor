@@ -1,15 +1,13 @@
-﻿
-@if (this.Inventory != null)
+﻿@if (this.Inventory != null)
 {
-  
+
     <tr>
         <td>@Inventory.InventoryName</td>
         <td>@Inventory.Quantity</td>
         <td>@Inventory.Price.ToString("c")</td>
         <td>
             <a href="/edit/@Inventory.InventoryId"
-                type="button"
-                    class="btn btn-light">
+               class="btn btn-light">
                 Edit
             </a>
         </td>

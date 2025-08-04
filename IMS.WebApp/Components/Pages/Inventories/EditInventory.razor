@@ -1,11 +1,11 @@
-﻿@page "/edit"
+﻿@page "/edit/{invId:int}"
 
-
-@inject IEditInventoryUseCase EditInventoryUseCase
 <h3>EditInventory</h3>
 
-
+<br />
+<p>Editing inventory item with ID: @InvId</p>
 
 @code {
-
+    [Parameter]
+    public int InvId { get; set; }
 }
