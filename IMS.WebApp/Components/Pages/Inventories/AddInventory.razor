@@ -6,6 +6,13 @@
 <br />
 
 <EditForm Model="inventory" FormName="formInventory" OnValidSubmit="Save">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    @* If summary is needed somewhere else, use the uncommented line above at the right place. *@
+    
+    @* <ValidationSummary></ValidationSummary> *@
+
+    @* I decided to put the validation messages under the fields *@
 
     <div class="form-group">
         <label for="name">Inventory Name</label>
@@ -14,6 +21,8 @@
             @bind-Value="inventory.InventoryName"
             class="form-control">
         </InputText>
+
+        <ValidationMessage For="@(() => inventory.InventoryName)"></ValidationMessage>
     </div>
 
     <div class="form-group">
@@ -23,6 +32,7 @@
             @bind-Value="inventory.Quantity"
             class="form-control">
         </InputNumber>
+        <ValidationMessage For="@(() => inventory.Quantity)"></ValidationMessage>
     </div>
 
     <div class="form-group">
@@ -32,6 +42,7 @@
             @bind-Value="inventory.Price"
             class="form-control">
         </InputNumber>
+        <ValidationMessage For="@(() => inventory.Price)"></ValidationMessage>
     </div>
 
     <br />
