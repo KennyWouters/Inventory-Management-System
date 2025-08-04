@@ -1,11 +1,51 @@
 ﻿@page "/edit/{invId:int}"
+@using IMS.UseCases.Inventories.Interfaces
+
+@inject IEditInventoryUseCase EditInventoryUseCase
+@inject NavigationManager NavigationManager
 
 <h3>EditInventory</h3>
 
 <br />
 <p>Editing inventory item with ID: @InvId</p>
+<EditForm Model="inventory"
+          FormName="formInventory"
+          OnValidSubmit="Update">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <div class="form-group">
+        <label for="name">Inventory Name</label>
+        <InputText id="name" @bind-Value="inventory.InventoryName" class="form-control"></InputText>
+        <ValidationMessage For="@(() => inventory.InventoryName)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="quantity">Quantity</label>
+        <InputNumber id="quantity" @bind-Value="inventory.Quantity" class="form-control"></InputNumber>
+        <ValidationMessage For="@(() => inventory.Quantity)"></ValidationMessage>
+    </div>
+    <div class="form-group">
+        <label for="price">Price</label>
+        <InputNumber id="price" @bind-Value="inventory.Price" class="form-control"></InputNumber>
+        <ValidationMessage For="@(() => inventory.Price)"></ValidationMessage>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Save</button>
+    </EditForm>
+
 
 @code {
+
     [Parameter]
     public int InvId { get; set; }
+    [SupplyParameterFromForm]
+    
+    private Inventory inventory { get; set; } = new Inventory();
+
+    private async Task Update()
+    {
+        await EditInventoryUseCase.ExecuteAsync(inventory);
+        NavigationManager.NavigateTo("/inventories");
+    }
+
+
+    
 }

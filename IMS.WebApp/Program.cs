@@ -1,6 +1,6 @@
 using IMS.Plugins.InMemory;
-using IMS.UseCases.Interfaces;
 using IMS.UseCases.Inventories;
+using IMS.UseCases.Inventories.Interfaces;
 using IMS.UseCases.PluginInterfaces;
 using IMS.WebApp.Components;
 using Microsoft.Extensions.DependencyInjection;
