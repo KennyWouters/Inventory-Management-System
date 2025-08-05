@@ -1,49 +1,84 @@
 ﻿@page "/edit/{invId:int}"
 @using IMS.UseCases.Inventories.Interfaces
 
+@inject IViewInventoryByIdUseCase ViewInventoryByIdUseCase
 @inject IEditInventoryUseCase EditInventoryUseCase
 @inject NavigationManager NavigationManager
 
-<h3>EditInventory</h3>
+<h3>Edit Inventory</h3>
 
 <br />
-<p>Editing inventory item with ID: @InvId</p>
-<EditForm Model="inventory"
-          FormName="formInventory"
-          OnValidSubmit="Update">
+
+<EditForm Model="inventory" FormName="formInventory" OnValidSubmit="Update">
     <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    @* Hidden field to keep a value *@
+    <InputNumber @bind-Value="inventory.InventoryId" hidden></InputNumber>
+
+    @* If summary is needed somewhere else, use the uncommented line above at the right place. *@
+    @* ==>> <ValidationSummary></ValidationSummary> *@
+    @* I decided to put the validation messages under the fields *@
+
     <div class="form-group">
         <label for="name">Inventory Name</label>
-        <InputText id="name" @bind-Value="inventory.InventoryName" class="form-control"></InputText>
+        <InputText id="name"
+                   @bind-Value="inventory.InventoryName"
+                   class="form-control">
+        </InputText>
+
         <ValidationMessage For="@(() => inventory.InventoryName)"></ValidationMessage>
     </div>
+
     <div class="form-group">
-        <label for="quantity">Quantity</label>
-        <InputNumber id="quantity" @bind-Value="inventory.Quantity" class="form-control"></InputNumber>
+        <label for="name">Quantity</label>
+        <InputNumber id="quantity"
+                     @bind-Value="inventory.Quantity"
+                     class="form-control">
+        </InputNumber>
         <ValidationMessage For="@(() => inventory.Quantity)"></ValidationMessage>
     </div>
+
     <div class="form-group">
         <label for="price">Price</label>
-        <InputNumber id="price" @bind-Value="inventory.Price" class="form-control"></InputNumber>
+        <InputNumber id="price"
+                     @bind-Value="inventory.Price"
+                     class="form-control">
+        </InputNumber>
         <ValidationMessage For="@(() => inventory.Price)"></ValidationMessage>
     </div>
+
     <br />
+
     <button type="submit" class="btn btn-primary">Save</button>
-    </EditForm>
+    &nbsp;
+    <a href="/inventories" class="btn btn-primary">Cancel</a>
+
+
+</EditForm>
 
 
 @code {
 
     [Parameter]
     public int InvId { get; set; }
+
     [SupplyParameterFromForm]
-    
-    private Inventory inventory { get; set; } = new Inventory();
+    private Inventory? inventory { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        // if this.inventory has a value, it will not be overwritten. ==> ??=
+        this.inventory ??= await ViewInventoryByIdUseCase.ExecuteAsync(this.InvId);
+    }
 
     private async Task Update()
     {
-        await EditInventoryUseCase.ExecuteAsync(inventory);
-        NavigationManager.NavigateTo("/inventories");
+        if (inventory != null)
+        {
+            await EditInventoryUseCase.ExecuteAsync(inventory);
+            NavigationManager.NavigateTo("/inventories");
+        }
+        
     }
 
 
