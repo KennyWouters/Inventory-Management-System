@@ -35,6 +35,17 @@ public class InventoryRepository : IInventoryRepository
         return Task.CompletedTask;
     }
 
+    public async Task DeleteInventoryByIdAsync(int inventoryId)
+    {
+      
+        var InventoryToDelete = GetInventoryByIdAsync(inventoryId).Result;
+        if (InventoryToDelete != null)
+        {
+            _inventories.Remove(InventoryToDelete);
+        }
+        await Task.CompletedTask;
+    }
+
     public async Task<IEnumerable<Inventory>> GetInventoriesByNameAsync(string name)
     {
         if(string.IsNullOrEmpty(name)) return await Task.FromResult(_inventories);
@@ -62,5 +73,7 @@ public class InventoryRepository : IInventoryRepository
         }
         return Task.CompletedTask;
     }
+
+
 
 }
