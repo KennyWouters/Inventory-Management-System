@@ -13,7 +13,11 @@
     <DataAnnotationsValidator></DataAnnotationsValidator>
 
     @* Hidden field to keep a value *@
+    if (inventory != null)
+    {
     <InputNumber @bind-Value="inventory.InventoryId" hidden></InputNumber>
+    }
+    
 
     @* If summary is needed somewhere else, use the uncommented line above at the right place. *@
     @* ==>> <ValidationSummary></ValidationSummary> *@
