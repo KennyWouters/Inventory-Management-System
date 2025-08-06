@@ -1,0 +1,22 @@
+﻿
+@if (this.Product != null)
+{
+    <tr>
+        <td>@Product.ProductName</td>
+        <td>@Product.Quantity</td>
+        <td>@Product.Price.ToString("c")</td>
+        <td>
+            <a href="/edit/@Product.ProductId"
+               class="btn btn-light">
+                Edit
+            </a>            
+        </td>
+    </tr>
+}
+
+@code {
+    [Parameter]
+    public Product? Product { get; set; }
+
+
+}
