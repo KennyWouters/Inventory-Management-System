@@ -58,6 +58,11 @@ public class InventoryRepository : IInventoryRepository
 
     }
 
+    public Task<IEnumerable<Inventory>> GetProductsByNameAsync(string name)
+    {
+        throw new NotImplementedException();
+    }
+
     public Task UpdateInventoryAsync(Inventory inventory)
     {
         if (_inventories.Any(x => x.InventoryId != inventory.InventoryId &&
