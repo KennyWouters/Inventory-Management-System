@@ -1,6 +1,4 @@
-﻿using IMS.CoreBusiness;
-
-namespace IMS.UseCases.Products.interfaces
+﻿namespace IMS.UseCases.Products.interfaces
 {
     public interface IViewProductsByNameUseCase
     {

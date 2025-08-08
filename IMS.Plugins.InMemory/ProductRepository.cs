@@ -1,6 +1,4 @@
-﻿using IMS.CoreBusiness;
-using IMS.UseCases.PluginInterfaces;
-using IMS.UseCases.Products.interfaces;
+﻿using IMS.UseCases.PluginInterfaces;
 
 namespace IMS.Plugins.InMemory;
 
@@ -15,6 +13,8 @@ public class ProductRepository : IProductRepository
         {
             new Product { ProductId = 1, ProductName = "Bike", Quantity = 10, Price =150  },
             new Product { ProductId = 2, ProductName = "Car", Quantity = 10, Price =2500  },
+            new Product { ProductId = 2, ProductName = "ToyCar", Quantity = 42, Price =3215  },
+            new Product { ProductId = 2, ProductName = "CatCar", Quantity = 35, Price =5800  },
         };
 
     }

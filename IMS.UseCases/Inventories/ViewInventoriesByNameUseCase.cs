@@ -5,14 +5,14 @@ using IMS.UseCases.PluginInterfaces;
 
 namespace IMS.UseCases.Inventories;
 
-public class ViewInventoriesByNameUseCase(IInventoryRepository productRepository) : IViewInventoriesByNameUseCase
+public class ViewInventoriesByNameUseCase(IInventoryRepository inventoryRepository) : IViewInventoriesByNameUseCase
 {
-    private readonly IInventoryRepository productRepository = productRepository;
+    private readonly IInventoryRepository inventoryRepository = inventoryRepository;
 
     public async Task<IEnumerable<Inventory>> ExecuteAsync(string name = "")
     {
-        return await productRepository.GetInventoriesByNameAsync(name);
-        
+        return await inventoryRepository.GetInventoriesByNameAsync(name);
+
     }
 
 }
